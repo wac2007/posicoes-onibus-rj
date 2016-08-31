@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Posições dos Ônibus RJ</title>
+  <!-- CSS -->
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- LIBS -->
+  <script src="libs/moment.js"></script>
+  <script src="libs/moment-timezone-with-data-2010-2020.js"></script>
+  <script src="libs/lodash.min.js"></script>
+  <script src="libs/angular.min.js"></script>
+  <script src="libs/angular-simple-logger.js"></script>
+  <script src="libs/angular-google-maps.min.js"></script>
+  <!-- JS -->
+  <script src="js/main.js"></script>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body ng-controller="LineController">
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Posições dos Ônibus RJ</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="https://github.com/wac2007/posicoes-onibus-rj/" target="_blank">Github</a>
+          </li>
+          <li>
+            <a href="http://geekempreendedor.com/" target="_blank">Geek Empreendedor</a>
+          </li>
+          <li>
+            <a href="http://data.rio/group/transporte-e-mobilidade/" target="_blank">Data.Rio</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1>Posições dos Ônibus RJ</h1>
+        <p class="lead">Utilizando os dados disponíveis no <a href="http://data.rio/group/transporte-e-mobilidade" target="_blank">Data.rio</a>,
+          você poderá visualizar as posições do GPS por linha.</p>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-sm-12 col-lg-offset-2 col-lg-8 text-center">
+          <div class="form-group">
+            <label for="line">Linha</label>
+            <input id="line" type="text" class="form-control text-center input-lg" ng-model="map.number"
+            placeholder="Digite uma linha de ônibus" ng-change="getData()" ng-model-options="{ debounce: 500 }"/>
+            <p class="bg-danger" ng-show="map.positions < 1">Sem posições disponíveis</p>
+          </div>
+          <div class="form-group">
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom">
+            <ui-gmap-markers models="map.positions" coords="'coords'"></ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <hr/>
+          <h4>Tecnologias Utilizadas</h4>
+          <ul class="list-unstyled">
+            <li><a href="http://getbootstrap.com/getting-started/#download" target="_blank">Bootstrap v3.3.7</a></li>
+            <li><a href="https://angularjs.org/" target="_blank">Angular v1.5.6</a></li>
+            <li><a href="https://github.com/angular-ui/angular-google-maps.git" target="_blank">Angular Google Maps v2.3.4</a></li>
+            <li><a href="momentjs.com" target="_blank">Moment.JS v2.14.1</a></li>
+            <li><a href="momentjs.com" target="_blank">Moment.JS Timezone v0.5.5</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted"><a href="http://geekempreendedor.com/" target="_blank">2016, Geek Empreendedor</a></p>
+        <p>Dados fornecidos por <a href="http://data.rio/group/transporte-e-mobilidade" target="_blank">Data.rio</a></p>
+      </div>
+    </footer>
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+  </body>
+
+  </html>
