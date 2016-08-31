@@ -30,7 +30,7 @@ angular.module('app', ['uiGmapgoogle-maps'])
   $scope.getData = function (){
     $http.get('http://dadosabertos.rio.rj.gov.br/apiTransporte/apresentacao/rest/index.cfm/obterPosicoesDaLinha/'+$scope.map.number)
     .success(function(data){
-      console.log('DATA', data);
+      // console.log('DATA', data);
       $scope.createPoints(data.DATA);
     });
   };
